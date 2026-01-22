@@ -8,7 +8,7 @@ TEST_OUT_FILE="$SCRIPT_DIR/test_output.json"
 rm -f "$TEST_OUT_FILE"
 
 echo "Testing file output flag (-f $TEST_OUT_FILE)..."
-(cd "$SCRIPT_PARENT_DIR" && ./bin/cal-event-notifier -f "$TEST_OUT_FILE" -c "$CALENDARS_CONF_FILE")
+(cd "$SCRIPT_PARENT_DIR" && ./bin/jfi -f "$TEST_OUT_FILE" -c "$CALENDARS_CONF_FILE")
 
 # 1. Check if file exists
 if [ ! -f "$TEST_OUT_FILE" ]; then

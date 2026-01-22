@@ -425,7 +425,7 @@ func main() {
 		fmt.Fprintf(out, "\n%s\n", color.New(color.FgCyan, color.Bold).Sprint(AppBy))
 		fmt.Fprintf(out, "Version: %s\n\n", color.New(color.FgYellow).Sprint(AppVersion))
 		fmt.Fprintf(out, "%s\n", color.New(color.FgHiWhite, color.Underline).Sprint("Usage:"))
-		fmt.Fprintf(out, "  readical [flags]\n\n")
+		fmt.Fprintf(out, "  jfi [flags]\n\n")
 
 		headerFmt := color.New(color.FgHiGreen, color.Bold).SprintfFunc()
 		columnFmt := color.New(color.FgHiWhite).SprintfFunc()
@@ -455,7 +455,7 @@ func main() {
 		fmt.Fprintln(out, "Priority Logic for --file \"\":")
 		fmt.Fprintln(out, "  1. $XDG_CACHE_HOME/event-notifications/out.json")
 		fmt.Fprintln(out, "  2. $HOME/.cache/event-notifications/out.json")
-		fmt.Fprintln(out, "  3. ./out/event-notifications.json")
+		fmt.Fprintln(out, "  3. ./out/out.json")
 	}
 
 	var (

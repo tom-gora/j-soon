@@ -22,11 +22,11 @@ EOF
 echo "Testing config parser robustness with 'junk' entries..."
 
 # 1. Run with clean config
-CLEAN_JSON=$(cd "$SCRIPT_PARENT_DIR" && ./bin/cal-event-notifier -c "$CLEAN_CONF" -u 30)
+CLEAN_JSON=$(cd "$SCRIPT_PARENT_DIR" && ./bin/jfi -c "$CLEAN_CONF" -u 30)
 CLEAN_COUNT=$(echo "$CLEAN_JSON" | jq 'length')
 
 # 2. Run with junk config
-JUNK_JSON=$(cd "$SCRIPT_PARENT_DIR" && ./bin/cal-event-notifier -c "$JUNK_CONF" -u 30)
+JUNK_JSON=$(cd "$SCRIPT_PARENT_DIR" && ./bin/jfi -c "$JUNK_CONF" -u 30)
 JUNK_COUNT=$(echo "$JUNK_JSON" | jq 'length')
 
 # Clean up

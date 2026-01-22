@@ -5,7 +5,7 @@ SCRIPT_PARENT_DIR=$(cd -- "$SCRIPT_DIR/.." &>/dev/null && pwd)
 CALENDARS_CONF_FILE="$SCRIPT_DIR/test_calendars.conf"
 
 echo "Testing event limit flag (-l $LIMIT)..."
-RAW_JSON=$(cd "$SCRIPT_PARENT_DIR" && ./bin/cal-event-notifier -l "$LIMIT" -c "$CALENDARS_CONF_FILE")
+RAW_JSON=$(cd "$SCRIPT_PARENT_DIR" && ./bin/jfi -l "$LIMIT" -c "$CALENDARS_CONF_FILE")
 
 COUNT=$(echo "$RAW_JSON" | jq 'length')
 if [ "$COUNT" -ne "$LIMIT" ]; then

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 SCRIPT_PARENT_DIR=$(cd -- "$SCRIPT_DIR/.." &>/dev/null && pwd)
-BINARY="$SCRIPT_PARENT_DIR/bin/cal-event-notifier"
+BINARY="$SCRIPT_PARENT_DIR/bin/jfi"
 
 echo "Testing informational flags..."
 

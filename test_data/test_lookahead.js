@@ -3,7 +3,7 @@
 const { execSync } = require("child_process");
 const path = require("path");
 
-const BINARY = path.join(__dirname, "..", "bin", "cal-event-notifier");
+const BINARY = path.join(__dirname, "..", "bin", "jfi");
 const CONFIG = path.join(__dirname, "test_calendars.conf");
 
 function parseICalDate(str) {
