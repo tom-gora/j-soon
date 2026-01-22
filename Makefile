@@ -8,7 +8,7 @@ all: build
 build:
 	@mkdir -p $(BUILD_DIR)
 	@echo "Building $(BINARY_NAME)..."
-	@go build -o $(BUILD_DIR)/$(BINARY_NAME) event-processor.go
+	@go build -o $(BUILD_DIR)/$(BINARY_NAME) JSON-from-iCal.go
 	@echo "Build complete: $(BUILD_DIR)/$(BINARY_NAME)"
 
 test_unit:
