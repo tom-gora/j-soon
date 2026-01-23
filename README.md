@@ -1,7 +1,8 @@
-<span style="font-size: 2rem; font-weight: bold; display: block; width: fit-content; margin-inline: auto;">  
-<h1 style="background: linear-gradient(to right, #ff8120 0%, #ff8150 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">  
-  JSON-from-iCal  
-</h1></span>  
+<p align="center">  
+  <img width="80%" src="./assets/header.svg" alt="header">  
+</p>  
+<br>  
+<br>  
 
 ![fun-with-skeumorphics](./assets/image.png)  
 <br><br>  

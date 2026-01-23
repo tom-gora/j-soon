@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="113.31739mm"
+   height="17.879444mm"
+   viewBox="0 0 113.31739 17.879444"
+   version="1.1"
+   id="svg1"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient1">
+      <stop
+         style="stop-color:#f87e22;stop-opacity:1;"
+         offset="0"
+         id="stop1" />
+      <stop
+         style="stop-color:#f97e51;stop-opacity:1;"
+         offset="0.25238916"
+         id="stop3" />
+      <stop
+         style="stop-color:#f8897e;stop-opacity:1;"
+         offset="0.49741632"
+         id="stop4" />
+      <stop
+         style="stop-color:#ca546c;stop-opacity:1;"
+         offset="0.74988651"
+         id="stop5" />
+      <stop
+         style="stop-color:#ad2a5c;stop-opacity:1;"
+         offset="1"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient1"
+       id="linearGradient2"
+       x1="23.081812"
+       y1="3.4202511"
+       x2="110.45477"
+       y2="47.938999"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.1692895,0,0,1.1692895,-16.969177,-5.1341775)" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-4.4434786,-15.952997)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.1212px;line-height:0;font-family:Poppins;-inkscape-font-specification:Poppins;text-align:end;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:end;opacity:1;fill:url(#linearGradient2);stroke:#da614c;stroke-width:1.34454;paint-order:markers stroke fill"
+       x="118.96528"
+       y="33.683056"
+       id="text1"><tspan
+         id="tspan1"
+         x="118.96528"
+         y="33.683056"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.1212px;font-family:'Fjalla One';-inkscape-font-specification:'Fjalla One, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:url(#linearGradient2);stroke:none;stroke-width:1.34454">JSON-from-iCal</tspan></text>
+  </g>
+</svg>
