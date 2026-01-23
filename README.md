@@ -1,5 +1,5 @@
-<p disabled align="center">  
-  <img disabled width="80%" src="./assets/header.svg" alt="header"><br>  
+<p aria-label="JSON-from-iCal" disabled align="center">  
+  <img disabled width="80%" src="./assets/header.svg" alt="JSON-from-iCal"><br>  
 </p>
 
 ![fun-with-skeumorphics](./assets/image.png)  
