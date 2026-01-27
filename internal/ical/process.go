@@ -12,8 +12,26 @@ import (
 	ics "github.com/arran4/golang-ical"
 	"github.com/tom-gora/JSON-from-iCal/internal/common"
 	l "github.com/tom-gora/JSON-from-iCal/internal/logger"
-	t "github.com/tom-gora/JSON-from-iCal/internal/types"
 )
+
+type CalendarEvent struct {
+	UID         string  `json:"UID"`
+	Start       string  `json:"Start"`
+	HumanStart  string  `json:"HumanStart"`
+	UnixStart   int64   `json:"UnixStart"`
+	End         string  `json:"End"`
+	HumanEnd    string  `json:"HumanEnd"`
+	UnixEnd     int64   `json:"UnixEnd"`
+	ActualEnd   string  `json:"ActualEnd"`
+	Summary     string  `json:"Summary"`
+	Location    string  `json:"Location"`
+	Description string  `json:"Description"`
+	Hours       float64 `json:"Hours"`
+	SubDay      bool    `json:"SubDay"`
+	Day         bool    `json:"Day"`
+	MultiDay    bool    `json:"MultiDay"`
+	Ongoing     bool    `json:"Ongoing"`
+}
 
 func FetchSource(uri string) (io.ReadCloser, error) {
 	if strings.HasPrefix(uri, "http://") || strings.HasPrefix(uri, "https://") {
@@ -42,8 +60,8 @@ func FetchSource(uri string) (io.ReadCloser, error) {
 	return nil, fmt.Errorf("invalid source: %s", uri)
 }
 
-func ProcessSourceToStruct(r io.Reader, today time.Time, c t.ExecutionCtx) []t.CalendarEvent {
-	var events []t.CalendarEvent
+func ProcessSourceToStruct(r io.Reader, today time.Time, t string, u int) []CalendarEvent {
+	var events []CalendarEvent
 
 	// Apply X-APPLE- filtering
 	pr, pw := io.Pipe()
@@ -56,10 +74,10 @@ func ProcessSourceToStruct(r io.Reader, today time.Time, c t.ExecutionCtx) []t.C
 	}
 
 	windowStart := zeroOutTimeFromDate(today)
-	windowEnd := windowStart.AddDate(0, 0, c.UpcomingDays).Add(24 * time.Hour).Add(-time.Second)
+	windowEnd := windowStart.AddDate(0, 0, u).Add(24 * time.Hour).Add(-time.Second)
 
 	for _, e := range cal.Events() {
-		event := strToStructEvent(e, c, today)
+		event := strToStructEvent(e, t, today)
 		dtStart := StrToStructDate(event.Start)
 		dtEnd := StrToStructDate(event.End)
 		if dtEnd.IsZero() {

@@ -9,7 +9,6 @@ import (
 
 	ics "github.com/arran4/golang-ical"
 	l "github.com/tom-gora/JSON-from-iCal/internal/logger"
-	t "github.com/tom-gora/JSON-from-iCal/internal/types"
 	"gitlab.com/metakeule/fmtdate"
 )
 
@@ -101,7 +100,7 @@ func shouldIncludeEvent(dtStart, dtEnd, windowStart, windowEnd time.Time) (keep 
 }
 
 // parse ical event raw text to struct
-func strToStructEvent(e *ics.VEvent, c t.ExecutionCtx, now time.Time) t.CalendarEvent {
+func strToStructEvent(e *ics.VEvent, t string, now time.Time) CalendarEvent {
 	uid := getCalValueIfExists(e, ics.ComponentPropertyUniqueId)
 	start := getCalValueIfExists(e, ics.ComponentPropertyDtStart)
 	actualEnd := getCalValueIfExists(e, ics.ComponentPropertyDtEnd)
@@ -123,13 +122,13 @@ func strToStructEvent(e *ics.VEvent, c t.ExecutionCtx, now time.Time) t.Calendar
 		actualEnd = start
 	}
 
-	return t.CalendarEvent{
+	return CalendarEvent{
 		UID:         uid,
 		Start:       start,
-		HumanStart:  dateStrToHuman(start, c.DateTemplate, now),
+		HumanStart:  dateStrToHuman(start, t, now),
 		UnixStart:   us,
 		End:         actualEnd,
-		HumanEnd:    dateStrToHuman(actualEnd, c.DateTemplate, now),
+		HumanEnd:    dateStrToHuman(actualEnd, t, now),
 		UnixEnd:     ue,
 		ActualEnd:   actualEnd,
 		Summary:     summary,

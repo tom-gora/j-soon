@@ -33,67 +33,66 @@ List of modifications made to the fork:
 ***************************************************************************** */
 
 import (
-	"encoding/json"
-	"fmt"
+	// "encoding/json"
+	// "fmt"
 	"os"
 	"sort"
 	"time"
 
-	"github.com/tom-gora/JSON-from-iCal/internal/cli"
-	"github.com/tom-gora/JSON-from-iCal/internal/common"
+	// "github.com/tom-gora/JSON-from-iCal/internal/common"
+	"github.com/tom-gora/JSON-from-iCal/internal/config"
 	"github.com/tom-gora/JSON-from-iCal/internal/ical"
 	l "github.com/tom-gora/JSON-from-iCal/internal/logger"
-	t "github.com/tom-gora/JSON-from-iCal/internal/types"
 )
 
 func main() {
 	// init with defaults
-	eCtx := cli.InitCtx()
-	fCtx := cli.GetFlagCtx()
-
-	// precedence: defaults < config file < flags
-	if fCtx.ConfigPath != "" {
-		eCtx.ConfigPath = fCtx.ConfigPath
-	}
-
-	if fCtx.ShowVersion {
-		fmt.Printf("%s\nVersion %s\n", common.AppBy, common.AppVersion)
-		os.Exit(common.ExitNorm.Int())
-	}
-
-	if fCtx.Verbose {
-		l.Log.EnableInfo()
-		l.Log.EnableDebug()
-		eCtx.Verbose = true
-	}
+	eCtx := config.InitCtx()
+	// fCtx := config.etFlagCtx()
+	//
+	// // precedence: defaults < config file < flags
+	// if fCtx.ConfigPath != "" {
+	// 	eCtx.ConfigPath = fCtx.ConfigPath
+	// }
+	//
+	// if fCtx.ShowVersion {
+	// 	fmt.Printf("%s\nVersion %s\n", common.AppBy, common.AppVersion)
+	// 	os.Exit(common.ExitNorm.Int())
+	// }
+	//
+	// if fCtx.Verbose {
+	// 	l.Log.EnableInfo()
+	// 	l.Log.EnableDebug()
+	// 	eCtx.Verbose = true
+	// }
 
 	var uris []string
-	var err error
+	// var err error
 
-	if eCtx.ConfigPath != "" {
-		// Try as JSON first
-		uris, err = cli.SetCtxFromConfig(&eCtx, fCtx)
-		if err != nil || len(uris) == 0 {
-			// Fallback to line-based config if JSON fails or has no calendars
-			uris, err = cli.ParseCalendarsConfig(eCtx.ConfigPath)
-			if err != nil {
-				l.Log.Error.Fatalf("failed to parse config: %v", err)
-			}
-		}
-	}
+	// if eCtx.ConfigPath != "" {
+	// 	// Try as JSON first
+	// 	uris, err = config.SetCtxFromConfig(&eCtx, fCtx)
+	// 	if err != nil || len(uris) == 0 {
+	// 		// Fallback to line-based config if JSON fails or has no calendars
+	// 		uris, err = config.ParseCalendarsConfig(eCtx.ConfigPath)
+	// 		if err != nil {
+	// 			l.Log.Error.Fatalf("failed to parse config: %v", err)
+	// 		}
+	// 	}
+	// }
+	//
+	// // Flag overrides
+	// if fCtx.SpecifiedFlags["u"] || fCtx.SpecifiedFlags["upcoming-days"] {
+	// 	eCtx.UpcomingDays = fCtx.UpcomingDays
+	// }
+	// if fCtx.SpecifiedFlags["l"] || fCtx.SpecifiedFlags["limit"] {
+	// 	eCtx.Limit = fCtx.Limit
+	// }
+	// if fCtx.IsOutputFileSet {
+	// 	eCtx.OutputFile = fCtx.OutputFile
+	// }
 
-	// Flag overrides
-	if fCtx.SpecifiedFlags["u"] || fCtx.SpecifiedFlags["upcoming-days"] {
-		eCtx.UpcomingDays = fCtx.UpcomingDays
-	}
-	if fCtx.SpecifiedFlags["l"] || fCtx.SpecifiedFlags["limit"] {
-		eCtx.Limit = fCtx.Limit
-	}
-	if fCtx.IsFileSet {
-		eCtx.TargetFile = fCtx.TargetFile
-	}
-
-	allEvents := []t.CalendarEvent{}
+	allEvents := []ical.CalendarEvent{}
 	now := time.Now()
 
 	if len(uris) > 0 {
@@ -104,14 +103,14 @@ func main() {
 				l.Log.Error.Printf("failed to fetch %s: %v", uri, err)
 				continue
 			}
-			events := ical.ProcessSourceToStruct(rc, now, eCtx)
+			events := ical.ProcessSourceToStruct(rc, now, eCtx.DateTemplate, eCtx.UpcomingDays)
 			allEvents = append(allEvents, events...)
 			rc.Close()
 		}
 	} else {
 		// Stdin fallback
 		l.Log.Info.Println("reading from stdin")
-		allEvents = ical.ProcessSourceToStruct(os.Stdin, now, eCtx)
+		allEvents = ical.ProcessSourceToStruct(os.Stdin, now, eCtx.DateTemplate, eCtx.UpcomingDays)
 	}
 
 	// Sort events by Start date in DESCENDING order
@@ -126,18 +125,18 @@ func main() {
 	}
 
 	// Output minified JSON
-	jsonBytes, err := json.Marshal(allEvents)
-	if err != nil {
-		l.Log.Error.Fatalf("failed to marshal events: %v", err)
-	}
+	// jsonBytes, err := json.Marshal(allEvents)
+	// if err != nil {
+	// 	l.Log.Error.Fatalf("failed to marshal events: %v", err)
+	// }
 
-	if fCtx.IsFileSet {
-		target := common.ResolveOutputPath(fCtx.TargetFile)
-		l.Log.Info.Printf("writing to %s", target)
-		if err := common.SafeWrite(target, jsonBytes); err != nil {
-			l.Log.Error.Fatalf("failed to write output: %v", err)
-		}
-	} else {
-		fmt.Println(string(jsonBytes))
-	}
+	// if fCtx.IsOutputFileSet {
+	// 	target := common.ResolveOutputPath(fCtx.OutputFile)
+	// 	l.Log.Info.Printf("writing to %s", target)
+	// 	if err := common.SafeWrite(target, jsonBytes); err != nil {
+	// 		l.Log.Error.Fatalf("failed to write output: %v", err)
+	// 	}
+	// } else {
+	// 	fmt.Println(string(jsonBytes))
+	// }
 }

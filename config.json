@@ -3,8 +3,8 @@
     "./test_data/calendars/calendar.ics",
     "./test_data/calendars/birthdays.ics"
   ],
-  "upcoming_days": 6,
+  "upcoming_days": 7,
   "events_limit": 0,
   "output_file": null,
-  "date_template": "[ DDD ] DD MMM YYYY"
+  "date_template": "[ DDD / DD MMM YYYY"
 }
