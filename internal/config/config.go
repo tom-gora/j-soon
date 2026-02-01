@@ -25,6 +25,14 @@ const (
 	DefaultVerbose      = false
 )
 
+type ConfigModel struct {
+	Calendars    []string `json:"calendars"`
+	UpcomingDays int      `json:"upcoming_days"`
+	Limit        int      `json:"events_limit"`
+	OutputFile   string   `json:"output_file"`
+	DateTemplate string   `json:"date_template"`
+}
+
 type ExecutionCtx struct {
 	IsStdin      bool
 	Calendars    []string
@@ -48,12 +56,14 @@ type FlagCtx struct {
 	SpecifiedFlags  map[string]bool
 }
 
-type ConfigCtx struct {
-	Calendars    []string `json:"calendars"`
-	UpcomingDays int      `json:"upcoming_days"`
-	Limit        int      `json:"events_limit"`
-	OutputFile   string   `json:"output_file"`
-	DateTemplate string   `json:"date_template"`
+func getDefaultConfigValues() ConfigModel {
+	return ConfigModel{
+		Calendars:    []string{},
+		UpcomingDays: DefaultUpcomingDays,
+		Limit:        DefaultLimit,
+		OutputFile:   DefaultOutputFile,
+		DateTemplate: DefaultDateTemplate,
+	}
 }
 
 func usage() {
@@ -95,16 +105,32 @@ func usage() {
 	fmt.Fprintln(out, "  3. ./out/out.json")
 }
 
-func setDefaultConfigPath() string {
+func setDefaultConfigPath() (string, error) {
+	var configPath string
 	xdgConfig := os.Getenv("XDG_CONFIG_HOME")
 	if xdgConfig != "" {
-		return filepath.Join(xdgConfig, "jfi", "config.json")
+		configPath = filepath.Join(xdgConfig, "jfi", "config.json")
+	} else {
+		home, err := os.UserHomeDir()
+		if err != nil {
+			return "", err
+		}
+		configPath = filepath.Join(home, ".config", "jfi", "config.json")
 	}
-	home, err := os.UserHomeDir()
+	dir := filepath.Dir(configPath)
+	_, err := os.Stat(configPath)
 	if err != nil {
-		l.Log.Error.Fatalf("failed to find default config location on the system. Declare custom with -c | --config flag or export $HOME | $XDG_CONFIG_HOME in your environment: %v", err)
+		if err := os.MkdirAll(dir, 0o700); err != nil {
+			return "", err
+		}
+		contentStruct := getDefaultConfigValues()
+		contentBytes, _ := json.MarshalIndent(contentStruct, "", "  ")
+		err := os.WriteFile(configPath, contentBytes, 0o644)
+		if err != nil {
+			return "", err
+		}
 	}
-	return filepath.Join(home, ".config", "jfi", "config.json")
+	return configPath, nil
 }
 
 func isExplicitConfigPathPassed() (string, error) {
@@ -128,13 +154,8 @@ func isExplicitConfigPathPassed() (string, error) {
 	return value, nil
 }
 
-func updateCtx(currentCtx *ExecutionCtx, newCtx ExecutionCtx) {
-	data, _ := json.Marshal(newCtx)
-	json.Unmarshal(data, currentCtx)
-}
-
-func getFileConfig(p string) (ConfigCtx, error) {
-	config := ConfigCtx{
+func getFileConfig(p string) (ConfigModel, error) {
+	config := ConfigModel{
 		Calendars:    []string{},
 		UpcomingDays: DefaultUpcomingDays,
 		Limit:        DefaultLimit,
@@ -144,12 +165,12 @@ func getFileConfig(p string) (ConfigCtx, error) {
 
 	JSONBytes, err := os.ReadFile(common.PathExpandTilde(p))
 	if err != nil {
-		return ConfigCtx{}, err
+		return ConfigModel{}, err
 	}
 
 	err = json.Unmarshal(JSONBytes, &config)
 	if err != nil {
-		return ConfigCtx{}, err
+		return ConfigModel{}, err
 	}
 	return config, nil
 }
@@ -166,7 +187,7 @@ func SetCtxFromConfig(ec *ExecutionCtx, fc FlagCtx) ([]string, error) {
 		return []string{}, err
 	}
 
-	var config ConfigCtx
+	var config ConfigModel
 	err = json.Unmarshal(JSONBytes, &config)
 	if err != nil {
 		return []string{}, err
@@ -192,8 +213,8 @@ func initFlags(fCtx *FlagCtx) {
 	flag.StringVar(&fCtx.ConfigPath, "config", "", "")
 	flag.StringVar(&fCtx.ConfigPath, "c", "", "")
 	flag.IntVar(&fCtx.UpcomingDays, "upcoming-days", 7, "")
-	flag.IntVar(&fCtx.Limit, "limit", 0, "")
 	flag.IntVar(&fCtx.UpcomingDays, "u", 7, "")
+	flag.IntVar(&fCtx.Limit, "limit", 0, "")
 	flag.IntVar(&fCtx.Limit, "l", 0, "")
 	flag.StringVar(&fCtx.OutputFile, "output-file", "", "")
 	flag.StringVar(&fCtx.OutputFile, "o", "", "")
@@ -239,7 +260,11 @@ func InitCtx() ExecutionCtx {
 		os.Exit(1)
 	}
 	if confFile == "" {
-		confFile = setDefaultConfigPath()
+		var err error
+		confFile, err = setDefaultConfigPath()
+		if err != nil {
+			l.Log.Error.Fatalf("failed to set up default config environment: %v. Please ensure $HOME or $XDG_CONFIG_HOME is correctly set and writable.", err)
+		}
 	}
 	// 1. Set default
 	CONTEXT := ExecutionCtx{
