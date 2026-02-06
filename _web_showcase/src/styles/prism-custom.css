@@ -41,7 +41,7 @@ html.dark #json-wrapper.active {
     &::before {
       content: "";
       position: absolute;
-      top: 0;
+      top: 3.5rem;
       bottom: 0;
       right: 0;
       width: 5rem;

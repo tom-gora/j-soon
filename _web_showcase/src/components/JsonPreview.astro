@@ -1,15 +1,17 @@
 <div id="json-wrapper">
+  <button id="close-btn" class="neo-button-sm block ml-auto !bg-[#dd8181] py-1 bg-neo-pink text-black">×</button>
   <pre>
     <code id="json-output"></code>
   </pre>
 </div>
 
-  <script>
+<script>
   import Prism from "prismjs";
   import "prismjs/components/prism-json";
 
   const wrapper = document.querySelector("#json-wrapper") as HTMLElement;
   const target = document.querySelector("#json-output") as HTMLElement;
+  const closeBtn = document.querySelector('#close-btn') as HTMLElement;
 
   window.addEventListener('jfi:show-events', (e: any) => {
     const data = JSON.stringify(e.detail, null,2) as string;
@@ -18,8 +20,16 @@
     target.innerHTML = dataFormatted;
     target.scrollIntoView({
       behavior: 'smooth',
-      block: 'nearest', 
+      block: 'start', 
     })
   })
-  </script>
+
+  closeBtn?.addEventListener('click', () => {
+   wrapper.classList.remove("active") 
+   window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
 
