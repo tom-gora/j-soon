@@ -2,7 +2,7 @@
 
 DAYS_LIMIT="$1"
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-PROCESSOR_BIN="$SCRIPT_DIR/bin/jfi"
+PROCESSOR_BIN="$SCRIPT_DIR/bin/jsoon"
 
 # remove when using build binary
 make build

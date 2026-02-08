@@ -1,4 +1,4 @@
-BINARY_NAME := jfi
+BINARY_NAME := jsoon
 BUILD_DIR := bin
 
 .PHONY: all build prepare_test_data test_unit test_emit test_validate test_limit test_file test_lookahead test_pipeline test_info test_all clean
@@ -8,7 +8,7 @@ all: build
 build:
 	@mkdir -p $(BUILD_DIR)
 	@echo "Building $(BINARY_NAME)..."
-	@go build -o $(BUILD_DIR)/$(BINARY_NAME) cmd/JSON-from-iCal/main.go
+	@go build -o $(BUILD_DIR)/$(BINARY_NAME) cmd/j-soon/main.go
 	@echo "Build complete: $(BUILD_DIR)/$(BINARY_NAME)"
 
 prepare_test_data:

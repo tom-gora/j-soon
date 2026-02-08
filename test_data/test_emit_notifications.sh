@@ -8,7 +8,7 @@ SCRIPT_PARENT_DIR=$(cd -- "$SCRIPT_DIR/.." &>/dev/null && pwd)
 CALENDARS_CONF_FILE="$SCRIPT_DIR/test_config.json"
 
 echo "Emitting notifications for $DAYS_LIMIT days..."
-RAW_JSON_ARR=$(cd "$SCRIPT_PARENT_DIR" && ./bin/jfi -u "$DAYS_LIMIT" -c "$CALENDARS_CONF_FILE" -f stdout)
+RAW_JSON_ARR=$(cd "$SCRIPT_PARENT_DIR" && ./bin/jsoon -u "$DAYS_LIMIT" -c "$CALENDARS_CONF_FILE" -f stdout)
 
 COUNT=$(echo "$RAW_JSON_ARR" | jq 'length')
 echo "Found $COUNT events to emit."

@@ -1,10 +1,10 @@
 import type { APIRoute } from "astro";
-import { runJfi } from "../../lib/jfi";
+import { runJSoon } from "../../lib/jsoon";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const { urls, options } = await request.json();
-    const data = runJfi(urls, options);
+    const data = runJSoon(urls, options);
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: { "Content-Type": "application/json" },

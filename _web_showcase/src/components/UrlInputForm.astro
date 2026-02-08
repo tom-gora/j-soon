@@ -223,8 +223,8 @@ const props = Astro.props
         if (data.length === 0) {
           alert('No upcoming events found for these calendars in the given range.');
         } else {
-          console.log('[UrlInputForm] Dispatching jfi:show-events with', data.length, 'events');
-          window.dispatchEvent(new CustomEvent('jfi:show-events', { detail: data }));
+          console.log('[UrlInputForm] Dispatching jsoon:show-events with', data.length, 'events');
+          window.dispatchEvent(new CustomEvent('jsoon:show-events', { detail: data }));
         }
       } else {
         alert(`Error: ${data.error || 'Unknown error'}`);

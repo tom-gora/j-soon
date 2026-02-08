@@ -39,10 +39,10 @@ import (
 	"sort"
 	"time"
 
-	"github.com/tom-gora/JSON-from-iCal/internal/config"
-	fu "github.com/tom-gora/JSON-from-iCal/internal/fileutil"
-	"github.com/tom-gora/JSON-from-iCal/internal/ical"
-	l "github.com/tom-gora/JSON-from-iCal/internal/logger"
+	"github.com/tom-gora/j-soon/internal/config"
+	fu "github.com/tom-gora/j-soon/internal/fileutil"
+	"github.com/tom-gora/j-soon/internal/ical"
+	l "github.com/tom-gora/j-soon/internal/logger"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-module github.com/tom-gora/JSON-from-iCal
+module github.com/tom-gora/j-soon
 
 go 1.22.0
 

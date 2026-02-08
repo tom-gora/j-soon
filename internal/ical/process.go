@@ -10,8 +10,8 @@ import (
 	"time"
 
 	ics "github.com/arran4/golang-ical"
-	fu "github.com/tom-gora/JSON-from-iCal/internal/fileutil"
-	l "github.com/tom-gora/JSON-from-iCal/internal/logger"
+	fu "github.com/tom-gora/j-soon/internal/fileutil"
+	l "github.com/tom-gora/j-soon/internal/logger"
 )
 
 type CalendarEvent struct {

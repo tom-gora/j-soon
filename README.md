@@ -1,11 +1,11 @@
-<p aria-label="JSON-from-iCal" disabled align="center">  
-  <img disabled width="90%" src="./_assets/header.svg" alt="JSON-from-iCal"><br>  
+<p aria-label="j-soon" disabled align="center">  
+  <img disabled width="90%" src="./_assets/header.svg" alt="j-soon"><br>  
 </p>  
 
 ![fun-with-skeumorphics](./_assets/image.png)  
 <br><br>  
 
-**JSON-from-iCal just produces JSON with your upcoming calendar events. Nothing more. UNIX philosphy. Period.**  
+**J-SOON just produces JSON with your upcoming calendar events. Nothing more. UNIX philosphy. Period.**  
 
 This project is a utility that extracts upcoming events from iCal calendar files (.ics) and outputs into JSON format. It is made to be scriptable to fit into your pipeline, indifferent to how the resulting data is consumed. It can take stdin string and both local and remote iCal files as declared in basic config file. It outputs json either to stdout or to a default / selected location .json file.  
 
@@ -28,19 +28,19 @@ While the binary is general-purpose, this repository includes an auxiliary pipel
 
 ## Usage
 
-`jfi` automatically detects its input mode based on whether data is being piped to it.  
+`jsoon` automatically detects its input mode based on whether data is being piped to it.  
 
 ### 1. Stdin Mode is Primary Mode
 
-If data is piped via **Stdin**, `jfi` processes it and ignores any calendars defined in the configuration file. Good for scripting.  
+If data is piped via **Stdin**, `jsoon` processes it and ignores any calendars defined in the configuration file. Good for scripting.  
 
 ```bash
-cat calendar.ics | ./bin/jfi
+cat calendar.ics | ./bin/jsoon
 ```  
 
 ### 2. Config Mode
 
-If no data is detected on **Stdin**, `jfi` looks for calendars in its configuration file.  
+If no data is detected on **Stdin**, `jsoon` looks for calendars in its configuration file.  
 
 Pass a JSON configuration file containing paths to local `.ics` files or remote URLs:  
 
@@ -56,10 +56,10 @@ Pass a JSON configuration file containing paths to local `.ics` files or remote 
 ```  
 
 ```bash
-./bin/jfi --config config.json
+./bin/jsoon --config config.json
 ```  
 
-**Persistence**: Default config path is `$XDG_CONFIG_HOME/jfi/config.json` (falls back to `~/.config/jfi/config.json`). If the file does not exist, `jfi` will create it with default values on the first run.  
+**Persistence**: Default config path is `$XDG_CONFIG_HOME/jsoon/config.json` (falls back to `~/.config/jsoon/config.json`). If the file does not exist, `jsoon` will create it with default values on the first run.  
 
 #### Default `config.json` Structure
 
@@ -76,14 +76,14 @@ When bootstrapped, your configuration will look like this:
 }
 ```  
 
-| Key              | Description                                                                                                                                                     |  
-| :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |  
-| `calendars`      | An array of strings (URLs or local file paths) to process.                                                                                                      |  
-| `upcoming_days`  | Number of days from today to look ahead.                                                                                                                        |  
-| `events_limit`   | Max number of total events to return (0 = unlimited).                                                                                                           |  
-| `output_file`    | Path to write output JSON. If empty or `"stdout"`, prints to terminal. Supports `~/` expansion. |
-| `date_template`  | Template the format of your choice of how to show dates.                                        |
-| `offset_markers` | A map of day offsets to string suffixes to append to the date.                                 |
+| Key              | Description                                                                                     |  
+| :--------------- | :---------------------------------------------------------------------------------------------- |  
+| `calendars`      | An array of strings (URLs or local file paths) to process.                                      |  
+| `upcoming_days`  | Number of days from today to look ahead.                                                        |  
+| `events_limit`   | Max number of total events to return (0 = unlimited).                                           |  
+| `output_file`    | Path to write output JSON. If empty or `"stdout"`, prints to terminal. Supports `~/` expansion. |  
+| `date_template`  | Template the format of your choice of how to show dates.                                        |  
+| `offset_markers` | A map of day offsets to string suffixes to append to the date.                                  |  
 
 #### Offset Markers (Dynamic Suffixes)
 
@@ -103,7 +103,7 @@ You can configure special suffixes to be appended to the formatted date string b
 
 #### Customizing Date Templates
 
-`jfi` uses the [fmtdate](https://gitlab.com/metakeule/fmtdate) library for date formatting. You can change how your dates look by modifying the `date_template` in your config or using the `-t` flag.  
+`jsoon` uses the [fmtdate](https://gitlab.com/metakeule/fmtdate) library for date formatting. You can change how your dates look by modifying the `date_template` in your config or using the `-t` flag.  
 
 **Common Placeholders:**  
 
@@ -124,21 +124,21 @@ _Note: Any characters not matching placeholders (like `[ ]`, `/`, or `-`) are pr
 
 ### CLI Flags
 
-| Flag              | Short | Default  | Description                                                |  
-| :---------------- | :---- | :------- | :--------------------------------------------------------- |  
-| `--upcoming-days` | `-u`  | `7`      | Days ahead to look for events                              |  
-| `--limit`         | `-l`  | `0`      | Max number of events (0 = unlimited)                       |  
-| `--output-file`   | `-f`  | `stdout` | Output file path (defaults to terminal)                    |  
-| `--config`        | `-c`  | `""`     | Path to custom config.json                                 |  
-| `--template`      | `-t`  | `""`     | Template string for output dates                           |  
-| `--verbose`       | `-v`  | `false`  | Enable detailed logging                                    |  
-| `--version`       | `-V`  | `false`  | Show version information                                   |  
+| Flag              | Short | Default  | Description                             |  
+| :---------------- | :---- | :------- | :-------------------------------------- |  
+| `--upcoming-days` | `-u`  | `7`      | Days ahead to look for events           |  
+| `--limit`         | `-l`  | `0`      | Max number of events (0 = unlimited)    |  
+| `--output-file`   | `-f`  | `stdout` | Output file path (defaults to terminal) |  
+| `--config`        | `-c`  | `""`     | Path to custom config.json              |  
+| `--template`      | `-t`  | `""`     | Template string for output dates        |  
+| `--verbose`       | `-v`  | `false`  | Enable detailed logging                 |  
+| `--version`       | `-V`  | `false`  | Show version information                |  
 
 ### Example
 
 ```bash
-./bin/jfi -u 2 -l 1 -c ./test_data/test_config.json | jq
-```
+./bin/jsoon -u 2 -l 1 -c ./test_data/test_config.json | jq
+```  
 
 ## Build and Testing
 
@@ -148,7 +148,7 @@ _Note: Any characters not matching placeholders (like `[ ]`, `/`, or `-`) are pr
 make build
 ```  
 
-The binary is written to `bin/jfi`. Place it in your `$PATH` according to your preference.  
+The binary is written to `bin/jsoon`. Place it in your `$PATH` according to your preference.  
 
 ### Testing
 

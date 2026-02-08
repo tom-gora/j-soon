@@ -13,7 +13,7 @@
   const target = document.querySelector("#json-output") as HTMLElement;
   const closeBtn = document.querySelector('#close-btn') as HTMLElement;
 
-  window.addEventListener('jfi:show-events', (e: any) => {
+  window.addEventListener('jsoon:show-events', (e: any) => {
     const data = JSON.stringify(e.detail, null,2) as string;
     const dataFormatted = Prism.highlight(data, Prism.languages.json, "json") as string;
     wrapper.classList.add("active");

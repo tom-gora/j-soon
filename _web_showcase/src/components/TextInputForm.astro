@@ -75,8 +75,8 @@
         if (data.length === 0) {
           alert('No upcoming events found for this calendar in the given range.');
         } else {
-          console.log('[TextInputForm] Dispatching jfi:show-events with', data.length, 'events');
-          window.dispatchEvent(new CustomEvent('jfi:show-events', { detail: data }));
+          console.log('[TextInputForm] Dispatching jsoon:show-events with', data.length, 'events');
+          window.dispatchEvent(new CustomEvent('jsoon:show-events', { detail: data }));
         }
       } else {
         alert(`Error: ${data.error || 'Unknown error'}`);

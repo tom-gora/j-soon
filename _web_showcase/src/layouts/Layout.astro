@@ -81,7 +81,7 @@ const darkSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
     <script is:inline>
       // Immediate execution to avoid FOUC
       (function() {
-        const theme = localStorage.getItem('jfi_theme') || 
+        const theme = localStorage.getItem('jsoon_theme') || 
           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         if (theme === 'dark') {
           document.documentElement.classList.add('dark');
@@ -100,7 +100,9 @@ const darkSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
             class={`neo-button-sm !px-0 !py-0 items-center inline-block bg-white text-black dark:bg-neo-dark dark:text-white ${Astro.url.pathname === '/' ? 'opacity-0 pointer-events-none' : ''}`}>
           <a class="grid items-center px-2 w-full h-full " href="/">← Back Home</a>
           </button>
-          <a href="/" class="text-2xl md:text-[3rem] font-black uppercase tracking-tighter">JFI &nbsp;WEB &nbsp;DEMO &nbsp;//</a>
+          <a href="/" class="text-2xl md:text-[3rem] font-black uppercase tracking-tighter">
+            J-SOON &nbsp;WEB &nbsp;DEMO &nbsp;//
+          </a>
           <button 
             id="theme-toggle" 
             class="neo-button bg-white text-black dark:bg-neo-dark dark:text-white py-1 px-3 text-xl"
@@ -114,7 +116,7 @@ const darkSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
         <slot />
       </main>
       <footer class="p-6 neo-border border-x-0 border-b-0 bg-neo-purple text-white dark:bg-neo-pink dark:text-black text-center font-bold transition-colors">
-        JSON-from-iCal © {new Date().getFullYear()}
+        J-SOON // {new Date().getFullYear()}
       </footer>
     </div>
 
@@ -130,7 +132,7 @@ const darkSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
 
       themeToggle?.addEventListener("click", () => {
         const isDark = document.documentElement.classList.toggle("dark");
-        localStorage.setItem("jfi_theme", isDark ? "dark" : "light");
+        localStorage.setItem("jsoon_theme", isDark ? "dark" : "light");
         updateIcon(isDark);
       });
     </script>

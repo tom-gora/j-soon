@@ -10,14 +10,14 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/rodaine/table"
-	fu "github.com/tom-gora/JSON-from-iCal/internal/fileutil"
-	l "github.com/tom-gora/JSON-from-iCal/internal/logger"
+	fu "github.com/tom-gora/j-soon/internal/fileutil"
+	l "github.com/tom-gora/j-soon/internal/logger"
 )
 
 // Defaults
 
 const (
-	AppBy      = "JSON-from-iCal by github.com/tom-gora"
+	AppBy      = "J-SOON by github.com/tom-gora"
 	AppVersion = "1.0.0"
 )
 
@@ -89,7 +89,7 @@ func usage() {
 	fmt.Fprintf(out, "\n%s\n", color.New(color.FgCyan, color.Bold).Sprint(AppBy))
 	fmt.Fprintf(out, "Version: %s\n\n", color.New(color.FgYellow).Sprint(AppVersion))
 	fmt.Fprintf(out, "%s\n", color.New(color.FgHiWhite, color.Underline).Sprint("Usage:"))
-	fmt.Fprintf(out, "  jfi [flags]\n\n")
+	fmt.Fprintf(out, "  jsoon [flags]\n\n")
 
 	headerFmt := color.New(color.FgHiGreen, color.Bold).SprintfFunc()
 	columnFmt := color.New(color.FgHiWhite).SprintfFunc()
@@ -120,13 +120,13 @@ func setDefaultConfigPath() (string, error) {
 	var configPath string
 	xdgConfig := os.Getenv("XDG_CONFIG_HOME")
 	if xdgConfig != "" {
-		configPath = filepath.Join(xdgConfig, "jfi", "config.json")
+		configPath = filepath.Join(xdgConfig, "jsoon", "config.json")
 	} else {
 		home, err := os.UserHomeDir()
 		if err != nil {
 			return "", err
 		}
-		configPath = filepath.Join(home, ".config", "jfi", "config.json")
+		configPath = filepath.Join(home, ".config", "jsoon", "config.json")
 	}
 	dir := filepath.Dir(configPath)
 	_, err := os.Stat(configPath)
@@ -285,10 +285,6 @@ func InitCtx() (ExecutionCtx, []string) {
 		uris = []string{}
 	}
 
-	if len(uris) < 1 && !isStdin {
-		l.Log.Error.Fatal("input must be provided. Either configure your calendars in the config file, or feed the content of a calendar file via stdin")
-	}
-
 	if fCtx.ShowVersion {
 		fmt.Printf("%s\nVersion %s\n", AppBy, AppVersion)
 		os.Exit(ExitNorm.Int())
@@ -297,6 +293,10 @@ func InitCtx() (ExecutionCtx, []string) {
 	if CONTEXT.Verbose {
 		l.Log.EnableInfo()
 		l.Log.EnableDebug()
+	}
+
+	if len(uris) < 1 && !isStdin {
+		l.Log.Error.Fatal("input must be provided. Either configure your calendars in the config file, or feed the content of a calendar file via stdin")
 	}
 
 	return CONTEXT, uris
