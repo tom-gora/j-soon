@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const props = Astro.props
+import { ICONS } from "../lib/icons"
 ---
 
 <Layout title="J-SOON // Showcase">
 	<div class="max-w-4xl mx-auto space-y-12 ">
     <header class="text-center space-y-2">
-      <h1 class="text-6xl grid gap-2 md:text-8xl  font-black uppercase tracking-tighter italic">
+      <h1 class="text-4xl lg:text-6xl grid gap-2 md:text-8xl  font-black uppercase tracking-tighter italic">
         <span>Get upcoming events from </span>
         <span class="skew-x-14 max-w-fit mx-auto translate-x-8 md:translate-x-24 bg-white text-black dark:bg-neo-pink dark:text-black px-8">iCal</span>
         <span class="-translate-x-8 md:-translate-x-24">Fast</span>
@@ -21,12 +22,7 @@ const props = Astro.props
             <p class="font-bold opacity-80">Test by pasting in raw iCal file content</p>
           </div>
           <div class="mt-4 xt-6xl self-end">
-            <svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" viewBox="0 0 24 24" {...props}>
-              <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="2">
-                <path d="M20 10V7l-5-5H4v20h16M14 2v6h6" />
-                <path d="M8.5 13v6m0-6H7m1.5 0H10m5.5 0v.909c0 .08-.027.159-.076.226c-.03.042-.066.079-.097.12L14 16m-1.5-3v.909c0 .08.027.159.076.226c.03.042.066.079.097.12L14 16m0 0l-1.327 1.746c-.031.04-.067.077-.097.119a.4.4 0 0 0-.076.227V19m1.5-3l1.327 1.746c.031.04.067.078.097.119q.076.104.076.227V19m4-6v6m0-6H18m1.5 0H21" />
-              </g>
-            </svg>
+            <Fragment set:html={ICONS.textFormLink} />
           </div>
         </div>
       </a>
@@ -38,9 +34,7 @@ const props = Astro.props
             <p class="font-bold opacity-80">Test on remote URL leading to iCal calendar files</p>
           </div>
           <div class="mt-4 text-6xl self-end">
-            <svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" viewBox="0 0 24 24" {...props}>
-              <path fill="currentColor" fill-rule="evenodd" d="M20.232 7.166L17.45 9.947l1.768 1.768l3.666-3.666l.884-.883l-.884-.884l-5.165-5.166l-.884-.884l-.884.884l-3.666 3.666l1.768 1.768l2.782-2.782zM1.5 3.25H.25v20.5h20.5V15h-2.5v6.25H2.75V5.75H9v-2.5zm14.284 3.198l-4.332 4.332l1.768 1.768l4.332-4.332zm-3.73 2.101l-2.782 2.782l3.397 3.397l2.782-2.781l1.768 1.767l-3.666 3.666l-.884.884l-.884-.884l-5.165-5.165l-.884-.884l.884-.884l3.666-3.666z" clip-rule="evenodd" />
-            </svg>
+            <Fragment set:html={ICONS.urlFormLink} />
           </div>
         </div>
       </a>

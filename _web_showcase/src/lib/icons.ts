@@ -81,4 +81,15 @@ export const ICONS = {
 		</g>
 	</g>
 </svg>`,
+
+  textFormLink: `<svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" viewBox="0 0 24 24" {...props}>
+  <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="2">
+    <path d="M20 10V7l-5-5H4v20h16M14 2v6h6" />
+    <path d="M8.5 13v6m0-6H7m1.5 0H10m5.5 0v.909c0 .08-.027.159-.076.226c-.03.042-.066.079-.097.12L14 16m-1.5-3v.909c0 .08.027.159.076.226c.03.042.066.079.097.12L14 16m0 0l-1.327 1.746c-.031.04-.067.077-.097.119a.4.4 0 0 0-.076.227V19m1.5-3l1.327 1.746c.031.04.067.078.097.119q.076.104.076.227V19m4-6v6m0-6H18m1.5 0H21" />
+  </g>
+</svg>`,
+
+  urlFormLink: `<svg xmlns="http://www.w3.org/2000/svg" width="4rem" height="4rem" viewBox="0 0 24 24" {...props}>
+  <path fill="currentColor" fill-rule="evenodd" d="M20.232 7.166L17.45 9.947l1.768 1.768l3.666-3.666l.884-.883l-.884-.884l-5.165-5.166l-.884-.884l-.884.884l-3.666 3.666l1.768 1.768l2.782-2.782zM1.5 3.25H.25v20.5h20.5V15h-2.5v6.25H2.75V5.75H9v-2.5zm14.284 3.198l-4.332 4.332l1.768 1.768l4.332-4.332zm-3.73 2.101l-2.782 2.782l3.397 3.397l2.782-2.781l1.768 1.767l-3.666 3.666l-.884.884l-.884-.884l-5.165-5.165l-.884-.884l.884-.884l3.666-3.666z" clip-rule="evenodd" />
+</svg>`,
 };
