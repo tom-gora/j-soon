@@ -1,5 +1,5 @@
-<p aria-label="j-soon" disabled align="center">  
-  <img disabled width="60%" src="./_assets/header.svg" alt="j-soon"><br><br>  
+<p align="center">  
+  <img src="./_assets/header.png" width="600" alt="j-soon">  
 </p>
 
 **J-SOON just produces JSON with your upcoming calendar events. Nothing more. UNIX philosphy. Period.**
