@@ -1,22 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
-const props = Astro.props
-import { ICONS } from "../lib/icons"
+import Layout from "../layouts/Layout.astro";
+const props = Astro.props;
+import { ICONS } from "../lib/icons";
 ---
 
 <Layout title="J-SOON // Showcase">
-	<div class="max-w-4xl mx-auto space-y-12 ">
+  <div class="max-w-4xl mx-auto space-y-12 ">
     <header class="text-center space-y-2">
       <h1 class="text-4xl lg:text-6xl grid gap-2 md:text-8xl  font-black uppercase tracking-tighter italic">
         <span>Get upcoming events from </span>
-        <span class="skew-x-14 max-w-fit mx-auto translate-x-8 md:translate-x-24 bg-white text-black dark:bg-neo-pink dark:text-black px-8">iCal</span>
+        <span
+          class="skew-x-14 max-w-fit mx-auto translate-x-8 md:translate-x-24 bg-white text-black dark:bg-neo-pink dark:text-black px-8"
+          >iCal</span
+        >
         <span class="-translate-x-8 md:-translate-x-24">Fast</span>
       </h1>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <a href="/text" class="group">
-        <div class="neo-border neo-shadow-lg p-8 bg-white dark:bg-neo-dark h-full flex flex-col justify-between group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all text-black dark:text-white">
+        <div
+          class="neo-border neo-shadow-lg p-8 bg-white dark:bg-neo-dark h-full flex flex-col justify-between group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all text-black dark:text-white"
+        >
           <div class="space-y-4">
             <div class="text-4xl font-black uppercase">Paste Text</div>
             <p class="font-bold opacity-80">Test by pasting in raw iCal file content</p>
@@ -28,7 +33,9 @@ import { ICONS } from "../lib/icons"
       </a>
 
       <a href="/urls" class="group">
-        <div class="neo-border neo-shadow-lg p-8 bg-neo-purple text-white dark:bg-neo-dark h-full flex flex-col justify-between group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all">
+        <div
+          class="neo-border neo-shadow-lg p-8 bg-neo-purple text-white dark:bg-neo-dark h-full flex flex-col justify-between group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all"
+        >
           <div class="space-y-4">
             <div class="text-4xl font-black uppercase">Calendar URLs</div>
             <p class="font-bold opacity-80">Test on remote URL leading to iCal calendar files</p>

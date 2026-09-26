@@ -63,7 +63,7 @@
 
 nav button {
   height: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   flex-shrink: 0;
 }
 
@@ -100,11 +100,11 @@ nav button {
 
   &.default {
     @apply bg-white text-black dark:bg-neo-dark dark:text-white;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
   }
 
   &.close {
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
     background-color: var(--color-neo-red-strong);
   }
 }
