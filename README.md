@@ -4,7 +4,7 @@
 
 **J-SOON just produces JSON with your upcoming calendar events. Nothing more. UNIX philosphy. Period.**
 
-![illustration-eye-catcher](./_assets/jsoon.png)  
+![illustration-eye-catcher](./_assets/jsoon.png)\
 <br>
 
 This project is a utility that extracts upcoming events from iCal calendar files (.ics) and outputs into JSON format. It is made to be scriptable to fit into your pipeline, indifferent to how the resulting data is consumed. It can take stdin string and both local and remote iCal files as declared in basic config file. It outputs json either to stdout or to a default / selected location .json file.
@@ -17,7 +17,7 @@ It does basic filtering, arithmetic and string formatting (to my liking, at this
 
 **Personal use case for making this: System Notifications**
 
-https://github.com/user-attachments/_assets/09cd5410-273d-4fce-bcae-103caa3e3eba
+https://github.com/user-attachments/\_assets/09cd5410-273d-4fce-bcae-103caa3e3eba
 
 While the binary is general-purpose, this repository includes an auxiliary pipeline (a small shell script using `jq` to process output and pipe data into `notify-send`) for a specific desktop use case: **System Notifications**. (Note: Project is personal and any scripts are just a reference implementation)
 
@@ -76,18 +76,18 @@ When bootstrapped, your configuration will look like this:
 }
 ```
 
-| Key              | Description                                                                                     |
+| Key | Description |
 | :--------------- | :---------------------------------------------------------------------------------------------- |
-| `calendars`      | An array of strings (URLs or local file paths) to process.                                      |
-| `upcoming_days`  | Number of days from today to look ahead.                                                        |
-| `events_limit`   | Max number of total events to return (0 = unlimited).                                           |
-| `output_file`    | Path to write output JSON. If empty or `"stdout"`, prints to terminal. Supports `~/` expansion. |
-| `date_template`  | Template the format of your choice of how to show dates.                                        |
-| `offset_markers` | A map of day offsets to string suffixes to append to the date.                                  |
+| `calendars` | An array of strings (URLs or local file paths) to process. |
+| `upcoming_days` | Number of days from today to look ahead. |
+| `events_limit` | Max number of total events to return (0 = unlimited). |
+| `output_file` | Path to write output JSON. If empty or `"stdout"`, prints to terminal. Supports `~/` expansion. |
+| `date_template` | Template the format of your choice of how to show dates. |
+| `offset_markers` | A map of day offsets to string suffixes to append to the date. |
 
 #### Offset Markers (Dynamic Suffixes)
 
-You can configure special suffixes to be appended to the formatted date string based on how many days away the event is. This is useful for highlighting events that are "TODAY" or "TOMORROW".
+You can configure special suffixes to be appended to the formatted date string based on how far away the event is. This is useful for highlighting events that are "TODAY" or "TOMORROW".
 
 ```json
 "offset_markers": {
@@ -107,32 +107,32 @@ You can configure special suffixes to be appended to the formatted date string b
 
 **Common Placeholders:**
 
-| Placeholder | Meaning             | Example    |
+| Placeholder | Meaning | Example |
 | :---------- | :------------------ | :--------- |
-| `YYYY`      | 4-digit year        | `2026`     |
-| `MM`        | Month (numeric)     | `02`       |
-| `MMM`       | Month (short name)  | `Feb`      |
-| `MMMM`      | Month (full name)   | `February` |
-| `DD`        | Day of month        | `01`       |
-| `D`         | Day of month (lean) | `1`        |
-| `DDD`       | Day of week (short) | `Sun`      |
-| `DDDD`      | Day of week (full)  | `Sunday`   |
-| `hh`        | Hour (24h)          | `14`       |
-| `mm`        | Minutes             | `05`       |
+| `YYYY` | 4-digit year | `2026` |
+| `MM` | Month (numeric) | `02` |
+| `MMM` | Month (short name) | `Feb` |
+| `MMMM` | Month (full name) | `February` |
+| `DD` | Day of month | `01` |
+| `D` | Day of month (lean) | `1` |
+| `DDD` | Day of week (short) | `Sun` |
+| `DDDD` | Day of week (full) | `Sunday` |
+| `hh` | Hour (24h) | `14` |
+| `mm` | Minutes | `05` |
 
 _Note: Any characters not matching placeholders (like `[ ]`, `/`, or `-`) are preserved as-is._
 
 ### CLI Flags
 
-| Flag              | Short | Default  | Description                             |
+| Flag | Short | Default | Description |
 | :---------------- | :---- | :------- | :-------------------------------------- |
-| `--upcoming-days` | `-u`  | `7`      | Days ahead to look for events           |
-| `--limit`         | `-l`  | `0`      | Max number of events (0 = unlimited)    |
-| `--output-file`   | `-f`  | `stdout` | Output file path (defaults to terminal) |
-| `--config`        | `-c`  | `""`     | Path to custom config.json              |
-| `--template`      | `-t`  | `""`     | Template string for output dates        |
-| `--verbose`       | `-v`  | `false`  | Enable detailed logging                 |
-| `--version`       | `-V`  | `false`  | Show version information                |
+| `--upcoming-days` | `-u` | `7` | Days ahead to look for events |
+| `--limit` | `-l` | `0` | Max number of events (0 = unlimited) |
+| `--output-file` | `-f` | `stdout` | Output file path (defaults to terminal) |
+| `--config` | `-c` | `""` | Path to custom config.json |
+| `--template` | `-t` | `""` | Template string for output dates |
+| `--verbose` | `-v` | `false` | Enable detailed logging |
+| `--version` | `-V` | `false` | Show version information |
 
 ### Example
 
@@ -152,7 +152,7 @@ The binary is written to `bin/jsoon`. Place it in your `$PATH` according to your
 
 ### Testing
 
-This project features quite a wide test suite covering both go internals and external interactions (scripts, piping, processing config etc).  
+This project features quite a wide test suite covering both go internals and external interactions (scripts, piping, processing config etc).\
 _**Note**: Unlike the code adaptation and writing, the tests were created by an AI agent under the strong and specific guidance of my watchful eye. Don't we know it, nobody likes writing tests. But designing and reviewing them may just be ok_ 😉
 
 - **Unit Tests**: Verifies internal date parsing and time window logic (programmatically, not based on hardcoded data).
@@ -170,6 +170,7 @@ This project was initially a fork of [jceaser/readical](https://github.com/jceas
 
 This project is published under the **MIT License**. See the [LICENSE](./LICENSE) file for more details.
 
----
+______________________________________________________________________
 
 _A focused tool for data-driven calendar workflows._
+
