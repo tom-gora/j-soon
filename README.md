@@ -87,7 +87,7 @@ When bootstrapped, your configuration will look like this:
 
 #### Offset Markers (Dynamic Suffixes)
 
-You can configure special suffixes to be appended to the formatted date string based on how far away the event is. This is useful for highlighting events that are "TODAY" or "TOMORROW".
+You can configure special suffixes to be appended to the formatted date string based on how many days away the event is. This is useful for highlighting events that are "TODAY" or "TOMORROW".
 
 ```json
 "offset_markers": {
